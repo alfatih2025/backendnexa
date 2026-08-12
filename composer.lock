@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4bd3d8df755bab4a2d890da2b028d54f",
+    "content-hash": "d8b7aa25632fbc54c952086dc42f62ac",
     "packages": [
         {
             "name": "brick/math",
@@ -21,8 +21,7 @@
                 "shasum": ""
             },
             "require": {
-                "php": "^8.2",
-                "laravel/framework": "^10.50.2"
+                "php": "^8.1"
             },
             "require-dev": {
                 "php-coveralls/php-coveralls": "^2.2",
@@ -8322,7 +8321,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.1"
+        "php": "^8.3"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
