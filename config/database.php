@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => strtolower((string) env('DB_CONNECTION', 'mysql')),
 
     /*
     |--------------------------------------------------------------------------
