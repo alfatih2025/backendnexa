@@ -2,6 +2,40 @@
 
 use Illuminate\Support\Str;
 
+$envValue = static function (string $key, ?string $fallbackKey = null, $default = null) {
+    $value = env($key);
+
+    if (is_string($value)) {
+        $value = trim($value);
+
+        foreach (array_filter([$key, $fallbackKey]) as $envKey) {
+            $prefix = "{$envKey}=";
+
+            if (str_starts_with($value, $prefix)) {
+                $value = trim(substr($value, strlen($prefix)));
+            }
+        }
+    }
+
+    if ($value === null || $value === '') {
+        $value = $fallbackKey ? env($fallbackKey) : null;
+    }
+
+    if (is_string($value)) {
+        $value = trim($value);
+
+        foreach (array_filter([$fallbackKey]) as $envKey) {
+            $prefix = "{$envKey}=";
+
+            if (str_starts_with($value, $prefix)) {
+                $value = trim(substr($value, strlen($prefix)));
+            }
+        }
+    }
+
+    return ($value === null || $value === '') ? $default : $value;
+};
+
 return [
 
     /*
@@ -15,7 +49,7 @@ return [
     |
     */
 
-    'default' => strtolower((string) env('DB_CONNECTION', 'mysql')),
+    'default' => strtolower((string) $envValue('DB_CONNECTION', null, 'mysql')),
 
     /*
     |--------------------------------------------------------------------------
@@ -46,11 +80,11 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', env('MYSQLHOST', '127.0.0.1')),
-            'port' => env('DB_PORT', env('MYSQLPORT', '3306')),
-            'database' => env('DB_DATABASE', env('MYSQLDATABASE', 'forge')),
-            'username' => env('DB_USERNAME', env('MYSQLUSER', 'forge')),
-            'password' => env('DB_PASSWORD', env('MYSQLPASSWORD', '')),
+            'host' => $envValue('DB_HOST', 'MYSQLHOST', '127.0.0.1'),
+            'port' => $envValue('DB_PORT', 'MYSQLPORT', '3306'),
+            'database' => $envValue('DB_DATABASE', 'MYSQLDATABASE', 'forge'),
+            'username' => $envValue('DB_USERNAME', 'MYSQLUSER', 'forge'),
+            'password' => $envValue('DB_PASSWORD', 'MYSQLPASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
