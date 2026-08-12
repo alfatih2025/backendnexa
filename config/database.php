@@ -79,7 +79,7 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'url' => env('DATABASE_URL'),
+            'url' => $envValue('DATABASE_URL', 'MYSQL_URL'),
             'host' => $envValue('DB_HOST', 'MYSQLHOST', '127.0.0.1'),
             'port' => $envValue('DB_PORT', 'MYSQLPORT', '3306'),
             'database' => $envValue('DB_DATABASE', 'MYSQLDATABASE', 'forge'),
