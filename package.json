@@ -2,14 +2,11 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "dev": "concurrently -n laravel,vite -c yellow,cyan \"php artisan serve --host=127.0.0.1 --port=8000\" \"vite\"",
-        "dev:laravel": "php artisan serve --host=127.0.0.1 --port=8000",
-        "dev:vite": "vite",
+        "dev": "vite",
         "build": "vite build"
     },
     "devDependencies": {
         "axios": "^1.6.4",
-        "concurrently": "^10.0.4",
         "laravel-vite-plugin": "^1.0.0",
         "vite": "^5.0.0"
     }
