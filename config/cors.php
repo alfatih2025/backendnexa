@@ -19,7 +19,13 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => array_filter([
+        env('FRONTEND_URL'),
+        env('APP_URL'),
+        'http://localhost:5173',      // Local dev
+        'http://localhost:3000',       // Local dev
+        'http://192.168.43.105:5173',  // Local network
+    ]),
 
     'allowed_origins_patterns' => [],
 
